@@ -1,0 +1,4 @@
+{
+  "*.js": ["eslint", "jest --bail --findRelatedTests"],
+  "*.css": ["prettier --list-different"]
+}

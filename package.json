@@ -1,0 +1,25 @@
+{
+  "name": "coffre",
+  "version": "0.1.0",
+  "description": "Config files manager",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/angryobject/coffre.git"
+  },
+  "main": "src/index.js",
+  "bin": {
+    "coffre": "src/cli.js"
+  },
+  "scripts": {
+    "precommit": "lint-staged"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-prettier": "^2.6.0",
+    "husky": "^0.14.3",
+    "jest": "^22.4.4",
+    "lint-staged": "^7.1.2",
+    "prettier": "^1.12.1"
+  }
+}

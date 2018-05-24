@@ -1,0 +1,66 @@
+const path = require('path');
+const pkg = require('./package');
+
+const IS_DEV = process.env.NODE_ENV !== 'production';
+
+// base config
+const config = {
+  mode: IS_DEV ? 'development' : 'production',
+  devtool: IS_DEV ? 'source-map' : false,
+
+  module: {
+    rules: [
+      // js
+      {
+        test: /\.js$/i,
+        exclude: /node_modules(?!\/ansi-regex)/,
+        loader: 'babel-loader',
+        options: { cacheDirectory: true },
+      },
+
+      // css
+      {
+        test: /\.css$/i,
+        exclude: /node_modules/,
+        use: [
+          { loader: 'style-loader', options: { sourceMap: IS_DEV } },
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1, sourceMap: IS_DEV },
+          },
+          { loader: 'postcss-loader', options: { sourceMap: IS_DEV } },
+        ],
+      },
+
+      // other
+      {
+        exclude: /\.(js|css|json)$/i,
+        loader: 'file-loader',
+        options: { name: '[name].[hash:4].[ext]' },
+      },
+    ],
+  },
+};
+
+module.exports = [
+  // bundles
+  Object.assign(
+    {
+      entry: {
+        main: './src/index.js',
+      },
+
+      output: {
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name].js',
+        publicPath: IS_DEV ? '/dist/' : (pkg.webpackPublicPath || '/') + 'dist/',
+      },
+
+      devServer: {
+        contentBase: path.join(__dirname, 'public'),
+        watchContentBase: true,
+      },
+    },
+    config
+  ),
+];

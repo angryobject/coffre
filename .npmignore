@@ -1,0 +1,11 @@
+**/__mocks__/**
+**/__tests__/**
+**/*.test.js
+yarn.lock
+.editorconfig
+.gitattributes
+.gitignore
+makefile
+.eslintrc
+.prettierrc
+.lintstagedrc

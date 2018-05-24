@@ -1,0 +1,17 @@
+{
+  "name": "project-name",
+  "version": "0.0.1",
+  "description": "project description",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/project.git"
+  },
+  "main": "src/index.js",
+  "bin": {
+    "project-name": "src/cli.js"
+  },
+  "scripts": {
+    "precommit": "lint-staged"
+  }
+}

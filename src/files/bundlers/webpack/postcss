@@ -1,0 +1,22 @@
+const rebase = require('postcss-url/src/type/rebase');
+const pkg = require('./package');
+
+const IS_DEV = process.env.NODE_ENV !== 'production';
+
+module.exports = {
+  plugins: [
+    require('postcss-import'),
+    require('postcss-url')({
+      url: (asset, dir, options) => {
+        // urls starting with / are
+        // served from public folder
+        if (asset.url[0] === '/') {
+          return IS_DEV ? asset.url : (pkg.webpackPublicPath || '/') + asset.url.slice(1);
+        }
+
+        return rebase(asset, dir, options);
+      },
+    }),
+    require('postcss-cssnext'),
+  ],
+};
